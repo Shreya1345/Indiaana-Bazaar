@@ -1,6 +1,6 @@
 # Indiaana Bazaar
 
-Indiaana Bazaar is a full-stack MERN e-commerce application for browsing products, managing a cart and wishlist, placing Razorpay orders in INR, and writing verified customer reviews. It also includes protected admin tools for products, orders, and users.
+Indiaana Bazaar is a full-stack MERN e-commerce application for browsing products, managing a cart and wishlist, placing Razorpay orders or optional no-payment test orders in INR, and writing verified customer reviews. It also includes protected admin tools for products, orders, and users.
 
 ## Features
 
@@ -13,7 +13,8 @@ Indiaana Bazaar is a full-stack MERN e-commerce application for browsing product
 - MongoDB-backed shopping cart
 - MongoDB-backed wishlist
 - INR pricing
-- Razorpay Checkout and server-side payment verification
+- Checkout payment choice: Razorpay or optional Test Mode (no payment collected)
+- Server-side Razorpay payment verification
 - Order history
 - Responsive Bootstrap UI
 
@@ -71,7 +72,7 @@ Indiana-Bazaar/
 - Node.js 18 or newer
 - npm
 - MongoDB Atlas or a local MongoDB instance
-- Razorpay account
+- Razorpay account and keys to accept real payments (optional if selecting Test Mode)
 - Cloudinary account
 
 ## Installation
@@ -107,6 +108,7 @@ NODE_ENV=development
 ```
 
 Do not commit real credentials or `.env` files.
+Razorpay keys are required for online payments. Test Mode does not collect payment.
 
 ## Running locally
 
@@ -159,6 +161,8 @@ The production build is generated in `frontend/dist`.
 | Wishlist | `/api/wishlist` |
 | Reviews | `/api/reviews` |
 | Analytics | `/api/analytics` |
+
+At checkout, customers can pay with Razorpay or choose Test Mode to place an order without a payment. Razorpay uses `POST /api/payment/order` and `POST /api/payment/verify`; Test Mode uses the authenticated `POST /api/payment/test-order` endpoint.
 
 ## Security notes
 

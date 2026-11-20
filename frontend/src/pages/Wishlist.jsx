@@ -1,8 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Spinner, Card, Button } from 'react-bootstrap';
 import { AuthContext } from '../context/AuthContext';
 import ProductCard from '../components/ProductCard';
+import { Icon } from '@iconify/react';
 
 const Wishlist = () => {
   const { user } = useContext(AuthContext);
@@ -24,20 +25,32 @@ const Wishlist = () => {
   if (!user) {
     return (
       <Container className="text-center py-5">
-        <h2>Wishlist</h2>
+        <h2 className="d-flex align-items-center justify-content-center gap-2">
+          <Icon icon="mdi:heart-outline" aria-hidden="true" /> Wishlist
+        </h2>
         <p className="text-secondary">Login to view your saved products.</p>
-        <Button as={Link} to="/login">Login</Button>
+        <Button as={Link} to="/login" className="d-inline-flex align-items-center gap-2 mx-auto">
+          <Icon icon="mdi:login" aria-hidden="true" /> Login
+        </Button>
       </Container>
     );
   }
 
   return (
     <Container>
-      <h2 className="mb-4">My Wishlist</h2>
+      <h2 className="mb-4 d-flex align-items-center gap-2">
+        <Icon icon="mdi:heart" className="text-danger" aria-hidden="true" /> My Wishlist
+      </h2>
       {loading ? (
         <div className="text-center py-5"><Spinner animation="border" variant="primary" /></div>
       ) : products.length === 0 ? (
-        <Card className="text-center p-5"><p className="mb-3">No products in your wishlist.</p><Button as={Link} to="/shop">Browse Products</Button></Card>
+        <Card className="text-center p-5">
+          <Icon icon="mdi:heart-off-outline" width="40" className="text-secondary mx-auto mb-3" aria-hidden="true" />
+          <p className="mb-3">No products in your wishlist.</p>
+          <Button as={Link} to="/shop" className="d-inline-flex align-items-center gap-2 mx-auto">
+            <Icon icon="mdi:storefront-outline" aria-hidden="true" /> Browse Products
+          </Button>
+        </Card>
       ) : (
         <Row className="g-4">
           {products.map((product) => (

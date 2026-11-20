@@ -1,25 +1,37 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { Icon } from '@iconify/react';
 
 const OrderSuccess = () => {
+  const { state } = useLocation();
+  const isTestOrder = state?.paymentProvider === 'test';
+  const confirmationMessage = state?.message || (
+    isTestOrder
+      ? 'Your test order was created without collecting payment.'
+      : 'Thank you for your order. Your payment was received and your shipment will be processed shortly.'
+  );
   const containerStyle = {
     maxWidth: '600px',
     margin: '50px auto',
     padding: '50px 30px',
-    background: '#18181b',
+    background: '#fff',
     borderRadius: '16px',
-    border: '1px solid rgba(255, 255, 255, 0.05)',
-    boxShadow: '0 10px 40px rgba(0,0,0,0.5)',
+    border: '1px solid #e4e4e7',
+    boxShadow: '0 12px 32px rgba(24,24,27,0.1)',
     textAlign: 'center'
   };
 
   return (
     <div style={containerStyle}>
-      <h2 style={{ fontSize: '2.5rem', marginBottom: '20px', color: '#10b981' }}>Payment Successful!</h2>
-      <p style={{ color: '#a1a1aa', fontSize: '1.2rem', marginBottom: '40px' }}>
-        Thank you for your order. We have securely received your payment and will process your shipment shortly.
+      <Icon icon="mdi:check-circle" width="64" className="text-success mb-3" aria-hidden="true" />
+      <h2 style={{ fontSize: '2.5rem', marginBottom: '20px', color: '#10b981' }}>
+        {isTestOrder ? 'Test Order Placed!' : 'Payment Successful!'}
+      </h2>
+      <p style={{ color: '#52525b', fontSize: '1.2rem', marginBottom: '40px' }}>
+        {confirmationMessage}
       </p>
-      <Link to="/shop" className="btn">Continue Shopping</Link>
+      <Link to="/shop" className="btn btn-primary px-4 py-2 d-inline-flex align-items-center gap-2">
+        <Icon icon="mdi:storefront-outline" aria-hidden="true" /> Continue Shopping
+      </Link>
     </div>
   );
 };

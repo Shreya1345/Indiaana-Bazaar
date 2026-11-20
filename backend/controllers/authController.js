@@ -56,11 +56,50 @@ const loginUser = async (req, res) => {
 
 const getUsers = async (req, res) => {
   try {
-    const users = await User.find({}).select('-password');
+    const users = await User.find({}).select('-password -addresses');
     res.json(users);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-module.exports = { registerUser, loginUser, getUsers };
+const getSavedAddresses = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id).select('addresses').lean();
+    if (!user) return res.status(404).json({ message: 'User not found.' });
+    return res.json(user.addresses || []);
+  } catch (error) {
+    console.error('Unable to load saved addresses:', error);
+    return res.status(500).json({ message: 'Unable to load saved addresses.' });
+  }
+};
+
+const saveAddress = async (req, res) => {
+  const fields = ['fullName', 'street', 'city', 'postalCode', 'country'];
+  const address = {};
+  for (const field of fields) {
+    address[field] = typeof req.body?.[field] === 'string' ? req.body[field].trim() : '';
+  }
+  if (Object.values(address).some((value) => !value)) {
+    return res.status(400).json({ message: 'Complete every shipping address field.' });
+  }
+
+  try {
+    const user = await User.findById(req.user._id);
+    if (!user) return res.status(404).json({ message: 'User not found.' });
+
+    const existingAddress = user.addresses.find((savedAddress) => fields.every(
+      (field) => savedAddress[field].trim().toLowerCase() === address[field].toLowerCase()
+    ));
+    if (existingAddress) return res.json({ address: existingAddress });
+
+    user.addresses.push(address);
+    await user.save();
+    return res.status(201).json({ address: user.addresses[user.addresses.length - 1] });
+  } catch (error) {
+    console.error('Unable to save address:', error);
+    return res.status(500).json({ message: 'Unable to save address.' });
+  }
+};
+
+module.exports = { registerUser, loginUser, getUsers, getSavedAddresses, saveAddress };

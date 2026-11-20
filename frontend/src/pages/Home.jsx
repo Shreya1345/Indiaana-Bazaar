@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Spinner, Button, Badge } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 import ProductCard from '../components/ProductCard';
+import { Icon } from '@iconify/react';
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -67,6 +68,7 @@ const Home = () => {
             </motion.p>
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
               <Button as={Link} to="/shop" variant="light" size="lg" className="px-4 fw-semibold text-primary">
+                <Icon icon="mdi:storefront-outline" className="me-2" aria-hidden="true" />
                 Explore the Shop
               </Button>
             </motion.div>
@@ -95,9 +97,9 @@ const Home = () => {
       <section aria-label="Store benefits">
         <Row className="g-3 mb-5">
         {[
-          ['Fast Delivery', 'Reliable shipping across India', '🚚', 'success'],
-          ['Secure Checkout', 'Safe Razorpay payments', '🛡️', 'primary'],
-          ['Easy Shopping', 'Simple cart and order tracking', '🛍️', 'warning']
+          ['Fast Delivery', 'Reliable shipping across India', 'mdi:truck-fast-outline', 'success'],
+          ['Secure Checkout', 'Safe Razorpay payments', 'mdi:shield-check-outline', 'primary'],
+          ['Easy Shopping', 'Simple cart and order tracking', 'mdi:shopping-outline', 'warning']
         ].map(([title, text, icon, variant], index) => (
           <Col md={4} key={title}>
             <motion.div
@@ -108,7 +110,7 @@ const Home = () => {
               whileHover={{ y: -6 }}
               className="h-100 rounded-4 border bg-white p-4 shadow-sm"
             >
-              <div className={`display-6 mb-2 text-${variant}`}>{icon}</div>
+              <div className={`display-6 mb-2 text-${variant}`}><Icon icon={icon} aria-hidden="true" /></div>
               <h5 className="mb-1">{title}</h5>
               <p className="text-secondary mb-0">{text}</p>
             </motion.div>
@@ -128,7 +130,9 @@ const Home = () => {
             <Badge bg="warning" text="dark" className="mb-2">Fresh selections</Badge>
             <h2 className="mb-0">Featured Products</h2>
           </div>
-          <Button as={Link} to="/shop" variant="outline-primary">View All</Button>
+          <Button as={Link} to="/shop" variant="outline-primary" className="d-inline-flex align-items-center gap-2">
+            View All <Icon icon="mdi:arrow-right" aria-hidden="true" />
+          </Button>
         </motion.div>
 
         {loading ? (

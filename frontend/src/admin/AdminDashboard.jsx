@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { Container, Card, Row, Col, Button, Spinner } from 'react-bootstrap';
+import { Icon } from '@iconify/react';
 
 const AdminDashboard = () => {
   const { user } = useContext(AuthContext);
@@ -62,12 +63,33 @@ const AdminDashboard = () => {
 
       <Card className="mt-4 shadow-sm">
         <Card.Body className="p-4">
-          <h3 className="text-warning mb-4">Administrative Controls</h3>
-          <div className="d-flex gap-3 flex-wrap">
-            <Button as={Link} to="/admin/add-product">+ Add Product</Button>
-            <Button as={Link} to="/admin/products" variant="secondary">Manage Products</Button>
-            <Button as={Link} to="/admin/orders" variant="secondary">Manage Orders</Button>
-            <Button as={Link} to="/admin/users" variant="secondary">Users Directory</Button>
+          <h3 className="text-warning mb-1">Administrative Controls</h3>
+          <p className="text-secondary mb-4">Manage your store from one place.</p>
+          <div className="row g-3">
+            <div className="col-12 col-sm-6 col-xl-3">
+              <Button as={Link} to="/admin/add-product" variant="light" className="w-100 h-100 d-flex align-items-center gap-3 border shadow-sm p-3 text-start">
+                <Icon icon="mdi:plus-box-outline" width="26" height="26" style={{ color: '#f97316', flexShrink: 0 }} aria-hidden="true" />
+                <span className="fw-semibold">Add Product</span>
+              </Button>
+            </div>
+            <div className="col-12 col-sm-6 col-xl-3">
+              <Button as={Link} to="/admin/products" variant="light" className="w-100 h-100 d-flex align-items-center gap-3 border shadow-sm p-3 text-start">
+                <Icon icon="mdi:package-variant-closed" width="26" height="26" style={{ color: '#2563eb', flexShrink: 0 }} aria-hidden="true" />
+                <span className="fw-semibold">Manage Products</span>
+              </Button>
+            </div>
+            <div className="col-12 col-sm-6 col-xl-3">
+              <Button as={Link} to="/admin/orders" variant="light" className="w-100 h-100 d-flex align-items-center gap-3 border shadow-sm p-3 text-start">
+                <Icon icon="mdi:clipboard-list-outline" width="26" height="26" style={{ color: '#16a34a', flexShrink: 0 }} aria-hidden="true" />
+                <span className="fw-semibold">Manage Orders</span>
+              </Button>
+            </div>
+            <div className="col-12 col-sm-6 col-xl-3">
+              <Button as={Link} to="/admin/users" variant="light" className="w-100 h-100 d-flex align-items-center gap-3 border shadow-sm p-3 text-start">
+                <Icon icon="mdi:account-group-outline" width="26" height="26" style={{ color: '#7c3aed', flexShrink: 0 }} aria-hidden="true" />
+                <span className="fw-semibold">Users Directory</span>
+              </Button>
+            </div>
           </div>
         </Card.Body>
       </Card>

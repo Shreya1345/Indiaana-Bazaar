@@ -11,7 +11,7 @@ const normalizeAddress = (address) => {
     normalized[field] = typeof address?.[field] === 'string' ? address[field].trim() : '';
   }
   if (Object.values(normalized).some((value) => !value)) {
-    const error = new Error('Complete the shipping address before paying.');
+    const error = new Error('Complete the shipping address before placing your order.');
     error.statusCode = 400;
     throw error;
   }
@@ -81,6 +81,32 @@ const createRazorpayOrder = async (req, res) => {
     });
   } catch (error) {
     return sendError(res, error, 'Unable to initialize Razorpay payment.');
+  }
+};
+
+const createTestOrder = async (req, res) => {
+  try {
+    const quote = await createCartQuote(req.body.items, 'INR');
+    const order = await Order.create({
+      userId: req.user._id,
+      items: quote.items,
+      totalAmount: quote.totalAmount,
+      currency: quote.currency,
+      address: normalizeAddress(req.body.address),
+      paymentProvider: 'test'
+    });
+
+    return res.status(201).json({
+      message: 'Test order placed successfully. No payment was collected.',
+      order
+    });
+  } catch (error) {
+    console.error(`Test order creation failed: ${error.message}`);
+    return res.status(error.statusCode || 500).json({
+      message: error.statusCode && error.statusCode < 500
+        ? error.message
+        : 'Unable to place test order.'
+    });
   }
 };
 
@@ -154,5 +180,6 @@ const verifyRazorpayPayment = async (req, res) => {
 
 module.exports = {
   createRazorpayOrder,
+  createTestOrder,
   verifyRazorpayPayment
 };

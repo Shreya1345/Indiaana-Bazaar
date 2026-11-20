@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -23,6 +23,7 @@ import AdminUsers from './admin/AdminUsers';
 import CartSync from './components/CartSync';
 import Wishlist from './pages/Wishlist';
 import { AuthContext } from './context/AuthContext';
+import { ToastContainer } from 'react-toastify';
 
 const AdminRoute = ({ children }) => {
   const { user } = useContext(AuthContext);
@@ -39,7 +40,7 @@ function App() {
       <main className="min-vh-100 py-4">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/shop" element={<Home />} />
+          <Route path="/shop" element={<Shop />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/wishlist" element={<Wishlist />} />
@@ -60,6 +61,7 @@ function App() {
         </Routes>
       </main>
       <Footer />
+      <ToastContainer position="top-right" autoClose={3500} newestOnTop closeOnClick pauseOnFocusLoss pauseOnHover theme="light" />
     </Router>
   );
 }

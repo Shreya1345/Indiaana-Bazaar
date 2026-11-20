@@ -4,7 +4,16 @@ const reviewSchema = new mongoose.Schema({
   productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   name: { type: String, required: false },
-  rating: { type: Number, required: true, min: 1, max: 5 },
+  rating: {
+    type: Number,
+    required: true,
+    min: 1,
+    max: 5,
+    validate: {
+      validator: (rating) => Number.isInteger(rating * 2),
+      message: 'Rating must use half-star increments.'
+    }
+  },
   comment: { type: String, required: true, trim: true, maxlength: 1000 }
 }, { timestamps: true });
 

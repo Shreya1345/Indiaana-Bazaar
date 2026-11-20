@@ -1,20 +1,19 @@
-import React from 'react';
-
 const textualStyle = {
   maxWidth: '900px',
   margin: '0 auto',
   padding: '40px',
-  background: '#18181b',
+  background: '#fff',
   borderRadius: '16px',
-  border: '1px solid rgba(255, 255, 255, 0.05)',
+  border: '1px solid #e4e4e7',
+  boxShadow: '0 12px 32px rgba(24,24,27,0.1)',
   lineHeight: '1.8',
-  color: '#a1a1aa'
+  color: '#52525b'
 };
 
 const ReturnPolicy = () => {
   return (
     <div style={textualStyle}>
-      <h2 style={{ color: '#fff', marginBottom: '20px', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '15px' }}>
+      <h2 style={{ color: '#18181b', marginBottom: '20px', borderBottom: '1px solid #e4e4e7', paddingBottom: '15px' }}>
         Return & Refund Policy
       </h2>
       

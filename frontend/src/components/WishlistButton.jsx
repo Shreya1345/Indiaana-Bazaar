@@ -1,6 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { AuthContext } from '../context/AuthContext';
+import { Icon } from '@iconify/react';
+import { toast } from 'react-toastify';
 
 const WishlistButton = ({ productId, className = '', rounded = false }) => {
   const { user } = useContext(AuthContext);
@@ -20,14 +22,19 @@ const WishlistButton = ({ productId, className = '', rounded = false }) => {
   }, [user, productId]);
 
   const toggleWishlist = async () => {
-    if (!user) return alert('Please login to use your wishlist.');
-    const res = await fetch(`/api/wishlist/${productId}`, {
-      method: 'PUT',
-      headers: { Authorization: `Bearer ${user.token}` }
-    });
-    const data = await res.json();
-    if (res.ok) setWishlisted(data.isWishlisted);
-    else alert(data.message || 'Unable to update wishlist.');
+    if (!user) return toast.error('Please login to use your wishlist.');
+    try {
+      const res = await fetch(`/api/wishlist/${productId}`, {
+        method: 'PUT',
+        headers: { Authorization: `Bearer ${user.token}` }
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Unable to update wishlist.');
+      setWishlisted(data.isWishlisted);
+      toast.success(data.isWishlisted ? 'Added to your wishlist.' : 'Removed from your wishlist.');
+    } catch (error) {
+      toast.error(error.message || 'Unable to update wishlist.');
+    }
   };
 
   return (
@@ -38,7 +45,7 @@ const WishlistButton = ({ productId, className = '', rounded = false }) => {
       onClick={toggleWishlist}
       aria-label={wishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
     >
-      {wishlisted ? '♥' : '♡'}
+      <Icon icon={wishlisted ? 'mdi:heart' : 'mdi:heart-outline'} width="20" aria-hidden="true" />
     </Button>
   );
 };

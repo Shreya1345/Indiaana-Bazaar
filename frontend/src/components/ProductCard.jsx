@@ -1,9 +1,9 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Button } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 import WishlistButton from './WishlistButton';
 import RatingDisplay from './RatingDisplay';
+import { Icon } from '@iconify/react';
 
 const ProductCard = ({ product }) => {
   const price = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(product.price);
@@ -27,7 +27,9 @@ const ProductCard = ({ product }) => {
             <RatingDisplay rating={product.ratings} count={product.numReviews} showCount={false} />
           </div>
           <Card.Text className="text-primary fw-bold fs-5 mb-3">{price}</Card.Text>
-          <Button as={Link} to={`/product/${product._id}`} variant="primary" className="mt-auto">View Details</Button>
+          <Button as={Link} to={`/product/${product._id}`} variant="primary" className="mt-auto d-inline-flex align-items-center justify-content-center gap-2">
+            View Details <Icon icon="mdi:arrow-right" width="18" aria-hidden="true" />
+          </Button>
         </Card.Body>
       </Card>
     </motion.div>

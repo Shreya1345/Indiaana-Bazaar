@@ -1,7 +1,9 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { Container, Card, Form, Button } from 'react-bootstrap';
+import { Icon } from '@iconify/react';
+import { toast } from 'react-toastify';
 
 const AddProduct = () => {
   const { user } = useContext(AuthContext);
@@ -20,7 +22,7 @@ const AddProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!image) return alert('Please select an image');
+    if (!image) return toast.error('Please select an image.');
     
     setLoading(true);
     const data = new FormData();
@@ -40,12 +42,14 @@ const AddProduct = () => {
       const responseData = await res.json();
       
       if (res.ok) {
+        toast.success('Product created successfully.');
         navigate('/admin/products');
       } else {
-        alert(responseData.message || 'Error creating product');
+        toast.error(responseData.message || 'Error creating product.');
       }
     } catch (error) {
       console.error(error);
+      toast.error('Unable to create product. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -55,7 +59,7 @@ const AddProduct = () => {
     <Container style={{ maxWidth: '700px' }}>
       <Card className="shadow-sm">
         <Card.Body className="p-4">
-          <h2 className="text-warning mb-4">Add New Product</h2>
+          <h2 className="text-warning mb-4"><Icon icon="mdi:plus-box-outline" className="me-2" aria-hidden="true" />Add New Product</h2>
           <Form onSubmit={handleSubmit}>
             <Form.Control className="mb-3" type="text" placeholder="Product Name" required onChange={(e) => setFormData({...formData, name: e.target.value})} />
             <Form.Control className="mb-3" as="textarea" placeholder="Description" required rows={4} onChange={(e) => setFormData({...formData, description: e.target.value})} />
@@ -63,10 +67,11 @@ const AddProduct = () => {
             <Form.Control className="mb-3" type="text" placeholder="Category" required onChange={(e) => setFormData({...formData, category: e.target.value})} />
             <Form.Control className="mb-3" type="number" placeholder="Stock Quantity" required onChange={(e) => setFormData({...formData, stock: e.target.value})} />
             <Form.Group className="mb-3">
-              <Form.Label>Upload Product Image (Cloudinary)</Form.Label>
+              <Form.Label><Icon icon="mdi:image-plus-outline" className="me-2 text-primary" aria-hidden="true" />Upload Product Image (Cloudinary)</Form.Label>
               <Form.Control type="file" accept="image/*" required onChange={(e) => setImage(e.target.files[0])} />
             </Form.Group>
-            <Button type="submit" disabled={loading} className="w-100">
+            <Button type="submit" disabled={loading} className="w-100 d-inline-flex align-items-center justify-content-center gap-2">
+              <Icon icon={loading ? 'mdi:loading' : 'mdi:cloud-upload-outline'} aria-hidden="true" />
               {loading ? 'Uploading & Creating...' : 'Publish Product'}
             </Button>
           </Form>

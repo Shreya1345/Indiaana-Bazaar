@@ -1,5 +1,5 @@
-import React from 'react';
 import { Card } from 'react-bootstrap';
+import StarRating from './StarRating';
 
 const ReviewList = ({ reviews = [] }) => (
   <Card className="shadow-sm h-100">
@@ -13,7 +13,7 @@ const ReviewList = ({ reviews = [] }) => (
             <strong>{review.name || review.userId?.name || 'Customer'}</strong>
             <small className="text-secondary">{new Date(review.createdAt).toLocaleDateString()}</small>
           </div>
-          <div className="text-warning">{'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}</div>
+          <StarRating rating={review.rating} />
           <p className="text-secondary mb-0 mt-2">{review.comment}</p>
         </div>
       ))}

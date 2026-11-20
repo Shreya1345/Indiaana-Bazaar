@@ -38,8 +38,8 @@ const createReview = async (req, res) => {
     if (!mongoose.isValidObjectId(productId)) {
       return res.status(400).json({ message: 'Invalid product.' });
     }
-    if (!Number.isInteger(rating) || rating < 1 || rating > 5) {
-      return res.status(400).json({ message: 'Rating must be between 1 and 5.' });
+    if (!Number.isFinite(rating) || !Number.isInteger(rating * 2) || rating < 1 || rating > 5) {
+      return res.status(400).json({ message: 'Rating must be between 1 and 5 in half-star increments.' });
     }
     if (!comment) {
       return res.status(400).json({ message: 'Review comment is required.' });
