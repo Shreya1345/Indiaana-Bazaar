@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Indiaana Bazaar
 
 Indiaana Bazaar is a full-stack MERN e-commerce application for browsing products, managing a cart and wishlist, placing Razorpay orders or optional no-payment test orders in INR, and writing verified customer reviews. It also includes protected admin tools for products, orders, and users.
@@ -180,3 +181,7 @@ At checkout, customers can pay with Razorpay or choose Test Mode to place an ord
 | `npm run dev:client` | Run the frontend only |
 | `npm run build` | Build the frontend |
 | `npm install` | Install backend and frontend dependencies |
+=======
+# Indiaana-Bazaar
+Indiaana Bazaar is a full-stack MERN e-commerce platform offering product browsing, search, database-backed cart and wishlist management, secure INR payments through Razorpay, verified customer reviews, ratings, order history, and an admin portal for managing products, orders, and users.
+>>>>>>> 2373d6b1abf5810db3bd2b29bafbb8ebb1ac8aed
