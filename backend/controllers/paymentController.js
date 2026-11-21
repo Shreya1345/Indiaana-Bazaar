@@ -84,7 +84,7 @@ const createRazorpayOrder = async (req, res) => {
   }
 };
 
-const createTestOrder = async (req, res) => {
+const createCodOrder = async (req, res) => {
   try {
     const quote = await createCartQuote(req.body.items, 'INR');
     const order = await Order.create({
@@ -93,19 +93,19 @@ const createTestOrder = async (req, res) => {
       totalAmount: quote.totalAmount,
       currency: quote.currency,
       address: normalizeAddress(req.body.address),
-      paymentProvider: 'test'
+      paymentProvider: 'cod'
     });
 
     return res.status(201).json({
-      message: 'Test order placed successfully. No payment was collected.',
+      message: 'Cash on Delivery order placed successfully. Payment will be collected when your order arrives.',
       order
     });
   } catch (error) {
-    console.error(`Test order creation failed: ${error.message}`);
+    console.error(`COD order creation failed: ${error.message}`);
     return res.status(error.statusCode || 500).json({
       message: error.statusCode && error.statusCode < 500
         ? error.message
-        : 'Unable to place test order.'
+        : 'Unable to place Cash on Delivery order.'
     });
   }
 };
@@ -180,6 +180,6 @@ const verifyRazorpayPayment = async (req, res) => {
 
 module.exports = {
   createRazorpayOrder,
-  createTestOrder,
+  createCodOrder,
   verifyRazorpayPayment
 };

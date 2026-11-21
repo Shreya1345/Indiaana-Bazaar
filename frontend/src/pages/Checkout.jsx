@@ -126,15 +126,15 @@ const Checkout = () => {
     }
     dispatch(clearCart());
     if (addressSaved) {
-      toast.success(provider === 'test' ? 'Test order placed successfully.' : 'Payment successful. Order placed.');
+      toast.success(provider === 'cod' ? 'Cash on Delivery order placed successfully.' : 'Payment successful. Order placed.');
     } else {
       toast.warning('Order placed, but this address could not be saved for future checkouts.');
     }
     navigate('/ordersuccess', {
       state: {
         message: orderData.message || (
-          provider === 'test'
-            ? 'Test order placed successfully. No payment was collected.'
+          provider === 'cod'
+            ? 'Cash on Delivery order placed successfully. Payment will be collected when your order arrives.'
             : 'Payment successful. Your order has been placed.'
         ),
         orderId: placedOrder._id,
@@ -155,8 +155,8 @@ const Checkout = () => {
     let paymentModalOpened = false;
     try {
       const items = cartItems.map(({ productId, qty }) => ({ productId, qty }));
-      if (paymentMethod === 'test') {
-        const orderRes = await fetch('/api/payment/test-order', {
+      if (paymentMethod === 'cod') {
+        const orderRes = await fetch('/api/payment/cod-order', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -165,8 +165,8 @@ const Checkout = () => {
           body: JSON.stringify({ items, address })
         });
         const orderData = await orderRes.json();
-        if (!orderRes.ok) throw new Error(orderData.message || 'Unable to place your test order.');
-        await finishOrder(orderData, 'test');
+        if (!orderRes.ok) throw new Error(orderData.message || 'Unable to place your Cash on Delivery order.');
+        await finishOrder(orderData, 'cod');
         return;
       }
 
@@ -296,33 +296,33 @@ const Checkout = () => {
                   />
                   <Form.Check
                     type="radio"
-                    id="payment-test"
+                    id="payment-cod"
                     name="paymentMethod"
-                    value="test"
-                    label="Test mode (no payment collected)"
-                    checked={paymentMethod === 'test'}
-                    onChange={() => setPaymentMethod('test')}
+                    value="cod"
+                    label="Cash on Delivery (COD)"
+                    checked={paymentMethod === 'cod'}
+                    onChange={() => setPaymentMethod('cod')}
                     disabled={placingOrder}
                   />
-                  {paymentMethod === 'test' && (
+                  {paymentMethod === 'cod' && (
                     <Form.Text className="d-block mt-1">
-                      Test mode creates an order for testing and does not charge your payment method.
+                      Pay in cash when your order is delivered.
                     </Form.Text>
                   )}
                 </Form.Group>
                 <div className="border-top mt-4 pt-4 text-end">
                   <h4 className="text-primary">Order Total: {formatPrice(totalInr)}</h4>
-                  {paymentMethod === 'test' && (
-                    <p className="text-secondary">No payment will be collected in Test Mode.</p>
+                  {paymentMethod === 'cod' && (
+                    <p className="text-secondary">Payment will be collected on delivery.</p>
                   )}
                   <Button type="submit" size="lg" disabled={placingOrder || loadingAddresses || cartItems.length === 0} className="d-inline-flex align-items-center gap-2">
                     <Icon
-                      icon={placingOrder ? 'mdi:loading' : paymentMethod === 'test' ? 'mdi:package-check' : 'mdi:credit-card-outline'}
+                      icon={placingOrder ? 'mdi:loading' : paymentMethod === 'cod' ? 'mdi:package-check' : 'mdi:credit-card-outline'}
                       aria-hidden="true"
                     />
                     {placingOrder
-                      ? (paymentMethod === 'test' ? 'Placing test order…' : 'Opening Razorpay…')
-                      : (paymentMethod === 'test' ? 'Place Test Order' : 'Pay with Razorpay')}
+                      ? (paymentMethod === 'cod' ? 'Placing COD order…' : 'Opening Razorpay…')
+                      : (paymentMethod === 'cod' ? 'Place COD Order' : 'Pay with Razorpay')}
                   </Button>
                 </div>
               </Form>

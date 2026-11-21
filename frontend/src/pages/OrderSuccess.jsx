@@ -3,10 +3,10 @@ import { Icon } from '@iconify/react';
 
 const OrderSuccess = () => {
   const { state } = useLocation();
-  const isTestOrder = state?.paymentProvider === 'test';
+  const isCodOrder = state?.paymentProvider === 'cod';
   const confirmationMessage = state?.message || (
-    isTestOrder
-      ? 'Your test order was created without collecting payment.'
+    isCodOrder
+      ? 'Your Cash on Delivery order was placed. Payment will be collected when it arrives.'
       : 'Thank you for your order. Your payment was received and your shipment will be processed shortly.'
   );
   const containerStyle = {
@@ -24,7 +24,7 @@ const OrderSuccess = () => {
     <div style={containerStyle}>
       <Icon icon="mdi:check-circle" width="64" className="text-success mb-3" aria-hidden="true" />
       <h2 style={{ fontSize: '2.5rem', marginBottom: '20px', color: '#10b981' }}>
-        {isTestOrder ? 'Test Order Placed!' : 'Payment Successful!'}
+        {isCodOrder ? 'COD Order Placed!' : 'Payment Successful!'}
       </h2>
       <p style={{ color: '#52525b', fontSize: '1.2rem', marginBottom: '40px' }}>
         {confirmationMessage}

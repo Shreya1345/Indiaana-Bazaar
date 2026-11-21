@@ -19,7 +19,7 @@ const orderSchema = new mongoose.Schema({
     country: { type: String, required: true }
   },
   paymentId: { type: String, unique: true, sparse: true },
-  paymentProvider: { type: String, enum: ['razorpay', 'test'] },
+  paymentProvider: { type: String, enum: ['razorpay', 'cod'] },
   status: { type: String, enum: ['Pending', 'Shipped', 'Delivered'], default: 'Pending' },
 }, { timestamps: true });
 

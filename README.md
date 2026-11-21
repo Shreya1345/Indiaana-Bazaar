@@ -1,6 +1,6 @@
 # Indiana Bazaar
 
-Indiana Bazaar is a full-stack MERN e-commerce application for browsing products, managing a cart and wishlist, placing Razorpay orders or optional no-payment test orders in INR, and writing verified customer reviews. It also includes protected admin tools for products, orders, and users.
+Indiana Bazaar is a full-stack MERN e-commerce application for browsing products, managing a cart and wishlist, placing Razorpay or Cash on Delivery orders in INR, and writing verified customer reviews. It also includes protected admin tools for products, orders, and users.
 
 ## Features
 
@@ -13,7 +13,7 @@ Indiana Bazaar is a full-stack MERN e-commerce application for browsing products
 - MongoDB-backed shopping cart
 - MongoDB-backed wishlist
 - INR pricing
-- Checkout payment choice: Razorpay or optional Test Mode (no payment collected)
+- Checkout payment choice: Razorpay or Cash on Delivery
 - Server-side Razorpay payment verification
 - Order history
 - Responsive Bootstrap UI
@@ -72,7 +72,7 @@ Indiana-Bazaar/
 - Node.js 18 or newer
 - npm
 - MongoDB Atlas or a local MongoDB instance
-- Razorpay account and keys to accept real payments (optional if selecting Test Mode)
+- Razorpay account and keys to accept online payments
 - Cloudinary account
 
 ## Installation
@@ -108,7 +108,7 @@ NODE_ENV=development
 ```
 
 Do not commit real credentials or `.env` files.
-Razorpay keys are required for online payments. Test Mode does not collect payment.
+Razorpay keys are required for online payments. Cash on Delivery can be used without an online payment gateway.
 
 ## Running locally
 
@@ -162,7 +162,7 @@ The production build is generated in `frontend/dist`.
 | Reviews | `/api/reviews` |
 | Analytics | `/api/analytics` |
 
-At checkout, customers can pay with Razorpay or choose Test Mode to place an order without a payment. Razorpay uses `POST /api/payment/order` and `POST /api/payment/verify`; Test Mode uses the authenticated `POST /api/payment/test-order` endpoint.
+At checkout, customers can pay with Razorpay or choose Cash on Delivery. Razorpay uses `POST /api/payment/order` and `POST /api/payment/verify`; COD uses the authenticated `POST /api/payment/cod-order` endpoint.
 
 ## Security notes
 
