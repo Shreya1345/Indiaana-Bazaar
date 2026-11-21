@@ -186,7 +186,7 @@ const Checkout = () => {
         key: orderData.key_id,
         amount: orderData.amount,
         currency: orderData.currency,
-        name: 'Indiaana Bazaar',
+        name: 'Indiana Bazaar',
         description: 'Order payment',
         order_id: orderData.id,
         prefill: {

@@ -25,11 +25,11 @@ const Navbar = () => {
   };
 
   return (
-    <BsNavbar expand="lg" bg="white" variant="light" sticky="top" className="border border-light-subtle shadow-sm rounded-3 mx-3 mt-2">
-      <Container>
+    <BsNavbar expand="lg" bg="white" variant="light" sticky="top" className="premium-navbar">
+      <Container fluid="xl">
         <BsNavbar.Brand as={Link} to={isAdmin ? '/admin' : '/'}>
-          <img src="/Logo.png" alt="Indiaana Bazaar" width="36" height="36" className="rounded me-2" />
-          Indiaana Bazaar
+          <span className="brand-mark me-2"><img src="/Logo.png" alt="" width="34" height="34" /></span>
+          <span>Indiana Bazaar</span>
         </BsNavbar.Brand>
         <BsNavbar.Toggle aria-controls="main-navigation" />
         <BsNavbar.Collapse id="main-navigation">
@@ -40,7 +40,7 @@ const Navbar = () => {
                 placeholder="Search products"
                 value={search}
                 onChange={(event) => setSearch(event.target.value)}
-                className="me-2"
+                className="premium-search me-2"
                 aria-label="Search products"
               />
               <Button type="submit" variant="outline-primary" className="d-inline-flex align-items-center gap-2">
@@ -66,7 +66,7 @@ const Navbar = () => {
         {user ? (
           <>
             <Nav.Link as={Link} to="/profile" className="d-flex align-items-center gap-1">
-              <Icon icon="mdi:account-circle-outline" width="18" aria-hidden="true" /> Hi, {user.name}
+              <Icon icon="mdi:account-circle-outline" width="18" aria-hidden="true" /> {isAdmin ? 'Indiana Bazaar Admin' : `Hi, ${user.name}`}
             </Nav.Link>
             {user.role === 'admin' && (
               <Nav.Link as={Link} to="/admin" className="d-flex align-items-center gap-1">

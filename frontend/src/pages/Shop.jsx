@@ -110,12 +110,9 @@ const Shop = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="rounded-4 p-4 p-md-5 mb-5 text-light shadow"
-        style={{
-          background: 'linear-gradient(135deg, #0d6efd 0%, #6f42c1 100%)'
-        }}
+        className="shop-hero rounded-4 p-4 p-md-5 mb-5 text-light"
       >
-        <h1 className="display-5 fw-bold mb-2">Shop Indiaana Bazaar</h1>
+        <h1 className="display-5 fw-bold mb-2">Shop Indiana Bazaar</h1>
         <p className="lead mb-0">Discover products across all categories.</p>
       </motion.section>
 

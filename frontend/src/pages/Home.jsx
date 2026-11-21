@@ -31,14 +31,12 @@ const Home = () => {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
-          className="position-relative overflow-hidden rounded-4 p-4 p-md-5 mb-4 text-light shadow"
+          className="home-hero position-relative overflow-hidden rounded-4 p-4 p-md-5 mb-5 text-light"
           style={{
             minHeight: '420px',
             display: 'block',
             visibility: 'visible',
-            opacity: 1,
-            backgroundColor: '#0d6efd',
-            backgroundImage: 'linear-gradient(135deg, #0d6efd 0%, #6f42c1 100%)'
+            opacity: 1
           }}
         >
         <motion.div
@@ -49,7 +47,7 @@ const Home = () => {
         />
         <Row className="align-items-center position-relative" style={{ minHeight: '330px' }}>
           <Col lg={7}>
-            <Badge bg="light" text="primary" className="mb-3 px-3 py-2">Indiaana Bazaar</Badge>
+            <Badge bg="light" text="primary" className="mb-3 px-3 py-2">Indiana Bazaar</Badge>
             <motion.h1
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -76,7 +74,7 @@ const Home = () => {
           <Col lg={5} className="d-none d-lg-flex justify-content-center">
             <motion.img
               src="/Logo.png"
-              alt="Indiaana Bazaar"
+              alt="Indiana Bazaar"
               className="rounded-4 shadow-lg"
               initial={{ opacity: 0, scale: 0.85, rotate: -3 }}
               animate={{ opacity: 1, scale: 1, rotate: 0 }}

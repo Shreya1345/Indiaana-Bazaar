@@ -1,23 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Stack } from 'react-bootstrap';
+import { Container, Row, Col, Stack } from 'react-bootstrap';
 
 const Footer = () => {
   return (
-    <footer className="bg-white text-dark border border-light-subtle rounded-3 shadow-sm mt-auto mx-3 mb-3 py-4">
-      <Container className="d-flex flex-wrap justify-content-between align-items-center gap-3">
-        <div>
-          <h5 className="text-primary mb-1">Indiaana Bazaar</h5>
-          <p className="text-secondary small mb-0">Premium E-Commerce Platform.</p>
-        </div>
-        <Stack direction="horizontal" gap={3} className="small">
-          <Link to="/about" className="text-secondary text-decoration-none">About Us</Link>
-          <Link to="/return" className="text-secondary text-decoration-none">Return Policy</Link>
-          <Link to="/disclaimer" className="text-secondary text-decoration-none">Disclaimer</Link>
-        </Stack>
-        <div className="text-secondary small">
-          &copy; {new Date().getFullYear()} Indiaana Bazaar. All rights reserved.
-        </div>
+    <footer className="premium-footer mt-auto">
+      <Container fluid="xl">
+        <Row className="align-items-center g-4">
+          <Col md>
+            <h5 className="footer-brand mb-1">Indiana Bazaar</h5>
+            <p className="text-secondary small mb-0">Curated shopping, thoughtfully delivered.</p>
+          </Col>
+          <Col md="auto">
+            <Stack direction="horizontal" gap={4} className="small justify-content-md-end footer-links">
+              <Link to="/about">About</Link>
+              <Link to="/return">Returns</Link>
+              <Link to="/disclaimer">Disclaimer</Link>
+            </Stack>
+          </Col>
+          <Col md="auto" className="text-secondary small text-md-end">
+            &copy; {new Date().getFullYear()} Indiana Bazaar
+          </Col>
+        </Row>
       </Container>
     </footer>
   );

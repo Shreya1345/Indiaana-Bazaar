@@ -5,6 +5,7 @@ import { store } from './redux/store';
 import { AuthProvider } from './context/AuthContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
+import './styles.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

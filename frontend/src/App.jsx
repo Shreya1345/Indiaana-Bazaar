@@ -37,7 +37,7 @@ function App() {
     <Router>
       <CartSync />
       <Navbar />
-      <main className="min-vh-100 py-4">
+      <main className="min-vh-100 app-main">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop />} />

@@ -35,7 +35,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 } else {
   app.get('/', (req, res) => {
-    res.send('Indiaana Bazaar API is running in Development mode...');
+    res.send('Indiana Bazaar API is running in Development mode...');
   });
 }
 

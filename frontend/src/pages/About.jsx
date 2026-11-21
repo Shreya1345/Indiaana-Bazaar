@@ -8,10 +8,10 @@ const About = () => {
         <Col lg={9}>
           <Card className="border shadow-sm">
             <Card.Body className="p-4 p-md-5">
-              <Badge bg="primary" className="mb-3 px-3 py-2">About Indiaana Bazaar</Badge>
+              <Badge bg="primary" className="mb-3 px-3 py-2">About Indiana Bazaar</Badge>
               <h1 className="display-6 fw-bold mb-3">A simpler way to discover and shop</h1>
               <p className="lead text-secondary">
-                Indiaana Bazaar is an online marketplace focused on clear product information,
+                Indiana Bazaar is an online marketplace focused on clear product information,
                 secure payments, and a smooth shopping experience for customers across India.
               </p>
 

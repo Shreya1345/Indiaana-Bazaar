@@ -62,7 +62,9 @@ const Profile = () => {
           <h2 style={{ color: '#18181b', fontSize: '2.2rem', marginBottom: '10px' }}>
             <Icon icon="mdi:account-circle-outline" className="me-2" aria-hidden="true" />My Profile
           </h2>
-          <p style={{ color: '#52525b', fontSize: '1.2rem', marginBottom: '5px' }}><strong>Name:</strong> {user.name}</p>
+          <p style={{ color: '#52525b', fontSize: '1.2rem', marginBottom: '5px' }}>
+            <strong>Name:</strong> {user.role === 'admin' ? 'Indiana Bazaar Admin' : user.name}
+          </p>
           <p style={{ color: '#52525b', fontSize: '1.2rem', marginBottom: '15px' }}><strong>Email:</strong> {user.email}</p>
           <span style={badgeStyle}>Account Type: {user.role.toUpperCase()}</span>
         </div>

@@ -14,12 +14,14 @@ const ProductCard = ({ product }) => {
       transition={{ type: 'spring', stiffness: 260, damping: 20 }}
       className="h-100"
     >
-      <Card className="h-100 shadow-sm overflow-hidden">
+      <Card className="h-100 premium-product-card overflow-hidden">
         <div className="position-absolute end-0 top-0 p-2" style={{ zIndex: 3 }}>
           <WishlistButton productId={product._id} rounded />
         </div>
         <motion.div whileHover={{ scale: 1.03 }} transition={{ duration: 0.35 }}>
-          <Card.Img variant="top" src={product.imageUrl} alt={product.name} style={{ height: '240px', objectFit: 'cover' }} />
+          <div className="product-image-wrap">
+            <Card.Img variant="top" src={product.imageUrl} alt={product.name} />
+          </div>
         </motion.div>
         <Card.Body className="d-flex flex-column">
           <Card.Title className="text-truncate">{product.name}</Card.Title>
