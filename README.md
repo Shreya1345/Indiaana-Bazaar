@@ -1,6 +1,6 @@
 # Indiana Bazaar
 
-Indiana Bazaar is a full-stack MERN e-commerce application for browsing products, managing a cart and wishlist, placing Razorpay or Cash on Delivery orders in INR, and writing verified customer reviews. It also includes protected admin tools for products, orders, and users.
+Indiana Bazaar is a full-stack MERN e-commerce application for browsing products, managing a cart and wishlist, placing orders through Razorpay or Cash on Delivery (COD), and writing verified customer reviews. It also includes protected admin tools for products, orders, and users.
 
 ## Features
 
@@ -13,8 +13,9 @@ Indiana Bazaar is a full-stack MERN e-commerce application for browsing products
 - MongoDB-backed shopping cart
 - MongoDB-backed wishlist
 - INR pricing
-- Checkout payment choice: Razorpay or Cash on Delivery
+- Checkout payment choice: Razorpay or Cash on Delivery (COD)
 - Server-side Razorpay payment verification
+- COD orders collect payment when the order is delivered
 - Order history
 - Responsive Bootstrap UI
 
@@ -72,7 +73,7 @@ Indiana-Bazaar/
 - Node.js 18 or newer
 - npm
 - MongoDB Atlas or a local MongoDB instance
-- Razorpay account and keys to accept online payments
+- Razorpay account and keys to accept online payments (optional when COD is enabled)
 - Cloudinary account
 
 ## Installation
@@ -108,7 +109,7 @@ NODE_ENV=development
 ```
 
 Do not commit real credentials or `.env` files.
-Razorpay keys are required for online payments. Cash on Delivery can be used without an online payment gateway.
+Razorpay keys are required for online payments. Cash on Delivery can be used without Razorpay.
 
 ## Running locally
 
@@ -162,12 +163,16 @@ The production build is generated in `frontend/dist`.
 | Reviews | `/api/reviews` |
 | Analytics | `/api/analytics` |
 
-At checkout, customers can pay with Razorpay or choose Cash on Delivery. Razorpay uses `POST /api/payment/order` and `POST /api/payment/verify`; COD uses the authenticated `POST /api/payment/cod-order` endpoint.
+At checkout, customers can pay securely with Razorpay or choose Cash on Delivery:
+
+- Razorpay order creation: `POST /api/payment/order`
+- Razorpay payment verification: `POST /api/payment/verify`
+- COD order creation: `POST /api/payment/cod-order`
 
 ## Security notes
 
 - Keep JWT and payment secrets out of source control.
-- Use Razorpay test keys in development.
+- Use Razorpay test credentials only for development and testing of the Razorpay gateway.
 - Restrict environment credentials to server-side use.
 - Add stronger rate limiting and validation before public production deployment.
 
@@ -180,6 +185,3 @@ At checkout, customers can pay with Razorpay or choose Cash on Delivery. Razorpa
 | `npm run dev:client` | Run the frontend only |
 | `npm run build` | Build the frontend |
 | `npm install` | Install backend and frontend dependencies |
-=======
-# Indiana Bazaar
-Indiana Bazaar is a full-stack MERN e-commerce platform offering product browsing, search, database-backed cart and wishlist management, secure INR payments through Razorpay, verified customer reviews, ratings, order history, and an admin portal for managing products, orders, and users.
